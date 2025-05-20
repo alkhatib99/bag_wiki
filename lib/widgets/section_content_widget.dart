@@ -3,6 +3,8 @@ import 'package:bag_about_us/models/section_model.dart';
 import 'package:bag_about_us/theme/app_theme.dart';
 import 'package:bag_about_us/widgets/accessibility_widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SectionContentWidget extends StatelessWidget {
   final SectionModel section;
@@ -42,7 +44,7 @@ class SectionContentWidget extends StatelessWidget {
               ),
               AnimatedContainer(
                 duration: AppTheme.animDurationMedium,
-                margin: EdgeInsets.symmetric(vertical: AppTheme.spacingMd),
+                margin: const EdgeInsets.symmetric(vertical: AppTheme.spacingMd),
                 child: (section.id == 'faq')
                     ? buildFAQSection(section)
                     : _buildContentCard(context, isDark),
@@ -150,11 +152,19 @@ class SectionContentWidget extends StatelessWidget {
       duration: AppTheme.animDurationMedium,
       padding: const EdgeInsets.all(AppTheme.spacingLg),
       decoration: AppTheme.getGradientCardDecoration(isDark: isDark),
-      child: AccessibleText(
+      child: Linkify(
+        onOpen: (link) async {
+          final url = Uri.parse(link.url);
+          if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+            throw 'Could not launch $url';
+          }
+        },
         text: section.content,
         style: Theme.of(context).textTheme.bodyLarge,
-        semanticLabel: 'Content for ${section.title}',
-        selectable: true,
+        linkStyle: const TextStyle(
+          color: Colors.blueAccent,
+          decoration: TextDecoration.underline,
+        ),
       ),
     );
   }

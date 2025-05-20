@@ -43,8 +43,13 @@ class ContentController extends GetxController {
       SectionModel(
         id: 'links',
         title: 'Official Links',
-        content:
-            'Connect with BAG through our official channels:\n- Website: https://bagguild.com\n- Discord: [Join our Discord community]\n- Twitter: [@BAGGuild]\n- Telegram: [BAG Official]\n- Medium: [BAG Guild Blog]',
+        content: 'Connect with BAG through our official channels:' +
+            '\n- Website: https://bagguild.com\n' +
+            '\n- Discord: https://discord.gg/bagguild\n' +
+            '\n- Twitter: https://twitter.com/BagGuild\n' +
+            '\n- Telegram: https://t.me/bagguild\n' +
+            '\n- Instagram: https://www.instagram.com/bagguild/\n' +
+            '\n-NFT_Icon: https://dapp.bagguild.com/\n',
         imageUrl: 'https://i.ibb.co/RTHrTtFn/BAG-Gulid-X-Bnr-01.png',
       ),
       SectionModel(
